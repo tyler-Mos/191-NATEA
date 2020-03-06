@@ -1,0 +1,8 @@
+
+.project
+*.prefs
+*.properties
+natea-webapp-project/.classpath
+natea-webapp-project/.springBeans
+*.lst
+*.class
