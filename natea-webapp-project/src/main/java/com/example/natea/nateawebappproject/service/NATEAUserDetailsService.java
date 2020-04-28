@@ -21,10 +21,13 @@ public class NATEAUserDetailsService implements UserDetailsService {
         return userDao.selectUserByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s not found", username)));
             */
-        Optional<User> user = userRepo.findByUserName(username);
+        Optional<User> user = userRepo.findByUsername(username);
 
         user.orElseThrow(() -> new UsernameNotFoundException("User Not found: " + username));
         return user.map(NATEAUserDetails::new).get();
+        //return buildUser(user);
     }
+
+
 
 }

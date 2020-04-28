@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
 public interface NATEAUserRepository extends JpaRepository<User, Integer>{
-    Optional<User> findByUserName(String username);
+    Optional<User> findByUsername(String username);
 }
