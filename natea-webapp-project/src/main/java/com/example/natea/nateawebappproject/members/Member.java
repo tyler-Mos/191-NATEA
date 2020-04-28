@@ -1,8 +1,10 @@
-package com.example.natea.nateawebappproject.model;
+package com.example.natea.nateawebappproject.members;
 
 import org.springframework.data.annotation.Id;
 
-
+/*
+will not work for formbase login, just for testing in memory database
+*/
 public class Member{
     @Id
     private String id;
