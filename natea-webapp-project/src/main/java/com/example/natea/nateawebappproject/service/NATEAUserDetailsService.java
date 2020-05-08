@@ -28,6 +28,6 @@ public class NATEAUserDetailsService implements UserDetailsService {
         //return buildUser(user);
     }
 
-
+    // TO DO: get user roles from database, string representation?
 
 }

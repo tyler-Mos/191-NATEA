@@ -36,7 +36,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
     */
     @Bean
     public PasswordEncoder passwordEncoder(){
-        //return new BCryptPasswordEncoder();
+        // return new BCryptPasswordEncoder(10);
         return NoOpPasswordEncoder.getInstance();
     }
     
@@ -56,16 +56,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
     }
     */
 
-    
-    
-
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         // order matters 
         http
                 .csrf().disable() // TODO: important, need to avoid csrf attack on logout get (should be post instead) request
                 .authorizeRequests()
-                .antMatchers("/","index", "/css/*","/js/*").permitAll()
+                .antMatchers("/","index", "/css/*","/js/*", "registration").permitAll()
                 //.antMatchers(HttpMethod.GET, "/members/**").hasAnyRole(ApplicationUserRole.ADMIN.name())
                 /*
                 .antMatchers(HttpMethod.GET, "/members/**").hasAuthority(ApplicationUserPermission.ADMIN_READ.getPermission())
@@ -75,8 +72,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
                 */
                 .anyRequest()
                 .authenticated()
-                .and().formLogin();
-                //.loginPage("/login").permitAll();
+                .and().formLogin()
+                .loginPage("/login").permitAll();
                 /*
                 .and().logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))  // TODO: may need to change to POST
@@ -85,28 +82,4 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter{
                     .logoutSuccessUrl("/login");
                 */
     }
-/*
-    @Override
-    @Bean
-    protected UserDetailsService userDetailsService(){
-        UserDetails annaSmithUser = User.builder()
-            .username("annasmith")
-            .password(passwordEncoder.encode("password"))
-            //.roles(ApplicationUserRole.MEMBER.name())
-            .authorities(ADMIN.getGrantedAuthorities())
-            .build();
-
-        UserDetails yingUser = User.builder()
-            .username("ying")
-            .password(passwordEncoder.encode("passwordother"))
-            //.roles(ApplicationUserRole.ADMIN.name())
-            .authorities(ADMIN.getGrantedAuthorities())
-            .build();
-
-        return new InMemoryUserDetailsManager(
-            annaSmithUser,
-            yingUser
-        );
-    }
-    */
 }
