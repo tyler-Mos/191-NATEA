@@ -12,6 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int memberID;  // should have the same name as the column name in the database table
+    private String email;
     private String username;
     private String password;
 
@@ -21,6 +22,14 @@ public class User {
 
     public void setMemberID(int memberID) {
         this.memberID = memberID;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
